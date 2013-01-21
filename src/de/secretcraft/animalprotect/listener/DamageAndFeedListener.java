@@ -32,12 +32,12 @@ public class DamageAndFeedListener implements Listener {
 		animals.add(EntityType.MUSHROOM_COW.getTypeId());
 	}
 
-	@EventHandler(priority=EventPriority.NORMAL)
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerInteractEntityEvent(PlayerInteractEntityEvent e) {
 		if (e.isCancelled())
 			return;
 		Player player = e.getPlayer();
-		
+
 		switch (e.getRightClicked().getType()) {
 		case SHEEP:
 		case COW:
@@ -53,6 +53,20 @@ public class DamageAndFeedListener implements Listener {
 			if (player.getItemInHand().getType() != Material.SEEDS)
 				return;
 			break;
+		case WOLF:
+			switch (player.getItemInHand().getTypeId()) {
+			case 319: // raw pork
+			case 320: // cooked pork
+			case 363: // raw beef
+			case 364: // cooked beef
+			case 365: // raw chicken
+			case 366: // cooked chicken
+			case 367: // rotten flesh
+				break;
+			default:
+				return;
+			}
+			break;
 		default:
 			return;
 		}
@@ -64,7 +78,7 @@ public class DamageAndFeedListener implements Listener {
 		}
 	}
 
-	@EventHandler(priority=EventPriority.NORMAL)
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent e) {
 		if (e.isCancelled())
 			return;
@@ -74,7 +88,7 @@ public class DamageAndFeedListener implements Listener {
 		} catch (Exception ex) {
 			return;
 		}
-		
+
 		if (!animals.contains(e.getEntity().getType().getTypeId()))
 			return;
 

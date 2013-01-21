@@ -1,5 +1,5 @@
 name: AnimalProtect
 main: de.secretcraft.animalprotect.AnimalProtect
-version: 0.3
+version: 0.4
 author: Max Heller
 description: Protects Animals from damage and feeding in WorldGuard regions.
