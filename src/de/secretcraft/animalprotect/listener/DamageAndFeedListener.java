@@ -30,6 +30,7 @@ public class DamageAndFeedListener implements Listener {
 		animals.add(EntityType.IRON_GOLEM.getTypeId());
 		animals.add(EntityType.SNOWMAN.getTypeId());
 		animals.add(EntityType.MUSHROOM_COW.getTypeId());
+		animals.add(EntityType.HORSE.getTypeId());
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
@@ -67,13 +68,18 @@ public class DamageAndFeedListener implements Listener {
 				return;
 			}
 			break;
+		case HORSE:
+			if (player.getItemInHand().getType() != Material.GOLDEN_APPLE
+					&& player.getItemInHand().getType() != Material.GOLDEN_CARROT)
+				return;
+			break;
 		default:
 			return;
 		}
 
 		if (!wgPlugin.canBuild(player, e.getRightClicked().getLocation())) {
 			player.sendMessage(ChatColor.DARK_RED
-					+ "You are not allowed to feed the animal in this area.");
+					+ "You are not allowed to breed the animal in this area.");
 			e.setCancelled(true);
 		}
 	}
